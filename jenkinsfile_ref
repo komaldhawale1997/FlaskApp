@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages
+    {
+        stage('Git Checkout')
+        {
+            steps 
+            {
+                git branch: 'main', url: 'https://github.com/komaldhawale1997/FlaskApp.git'
+            }
+        }
+    
+
+        stage('Build') 
+        {
+            steps
+            {
+                sh 'docker build -t pyapp:latest .'
+            }
+        }
+    
+
+        stage('Run') 
+        {
+            steps
+            {
+                echo 'Docker run -d 5000:5000 pyapp:latest'
+            }
+        }
+    }
+}
